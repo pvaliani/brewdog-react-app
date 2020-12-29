@@ -6,7 +6,7 @@ const BeerFilterForm = ({ onUserInput }) => {
   
     return (
       <>
-        <span>beer filter: </span>
+        <span>Filter by beer:</span>
         <input 
           type="text" 
           placeholder="search..."

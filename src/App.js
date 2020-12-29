@@ -3,15 +3,30 @@ import { useState, useEffect } from 'react';
 import BeerList from './components/BeerList';
 import BeerFilterForm from './components/BeerFilterForm';
 
+// app.js is the container in this case
+
 function App() {
+
+  // destructured array stores the array of beers and allows us to set the beers with a setBeer method. The same is true for the filteredBeers when we invoke the BeerFilterForm. UseState is an empty array
+
   const [beers, setBeers] = useState([]);
   const [filteredBeers, setFilteredBeers] = useState([]);
+
+  // Create a method to fetchBeers using the fetch method of React
 
   const fetchBeers = () => {
     const url = `https://api.punkapi.com/v2/beers?per_page=80`;
 
-    fetch(url)      // returns a promise
+  // fetch returns a promise object
+
+    fetch(url) 
+
+    // .then returns another promise which is a response that is then converted to JSON
+
       .then((response) => response.json())  // returns another promise
+
+      // we then spread the json data returned to add in niall's beer object to the array of beers 
+
       .then((jsonData) => {
         setBeers([...jsonData, {
           id: 420,
@@ -19,6 +34,8 @@ function App() {
           tagline: "home of the whoppy",
           image_url: "https://i.imgur.com/vGNZn3F.jpg"
         }]);
+
+        // pass setFilteredBeers the JSON data
         setFilteredBeers(jsonData);
       });
   };
@@ -38,7 +55,7 @@ function App() {
 
   return (
     <main>
-      <h1>getting the beers in</h1>
+      <h1>The Brewdog Collection</h1>
       <div id="top-section">
         <BeerFilterForm onUserInput={handleUserFilter}/>
       </div>
